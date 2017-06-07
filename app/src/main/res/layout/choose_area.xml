@@ -21,10 +21,11 @@
             android:layout_marginLeft="10dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/ic_arrow_back_black_18dp"/>
+            android:background="@drawable/ic_arrow_back_white_18dp"/>
     </RelativeLayout>
     <ListView
         android:id="@+id/list_view"
+        android:background="#efeaea"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></ListView>
 
