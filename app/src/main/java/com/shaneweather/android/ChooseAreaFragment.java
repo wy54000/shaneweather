@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import com.shaneweather.android.db.City;
 import com.shaneweather.android.db.County;
 import com.shaneweather.android.db.Province;
 import com.shaneweather.android.util.HttpUtil;
+import com.shaneweather.android.util.LogUtil;
 import com.shaneweather.android.util.Utility;
 
 import org.litepal.crud.DataSupport;
@@ -31,6 +33,10 @@ import java.util.List;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
+
+import static android.content.Context.MODE_APPEND;
+import static android.content.Context.MODE_MULTI_PROCESS;
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by MOONRMY on 2017-06-03.
@@ -82,9 +88,11 @@ public class ChooseAreaFragment extends Fragment {
                         queryCounty();
                 }else if (currentLevel==LEVEL_COUNTY){
                     String weatherId=countyList.get(position).getWeatherId();
+
                     if (getActivity() instanceof MainActivity){
                         Intent intent=new Intent(getContext(), WeatherActivity.class);
                         intent.putExtra("weather_id", weatherId);
+                        LogUtil.d("ChooseAreaFragment", weatherId);
                         startActivity(intent);
                         getActivity().finish();
                     }else if (getActivity() instanceof WeatherActivity){
@@ -92,6 +100,7 @@ public class ChooseAreaFragment extends Fragment {
                         weatherActivity.drawerLayout.closeDrawers();
                         weatherActivity.swipeRefresh.setRefreshing(true);
                         weatherActivity.requestWeather(weatherId);
+                        LogUtil.d("ChooseAreaFragment", weatherId);
 
                     }
                 }
