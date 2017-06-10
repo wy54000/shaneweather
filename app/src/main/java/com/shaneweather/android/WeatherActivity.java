@@ -1,5 +1,6 @@
 package com.shaneweather.android;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
@@ -27,6 +28,7 @@ import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.shaneweather.android.gson.Forecast;
 import com.shaneweather.android.gson.Weather;
+import com.shaneweather.android.service.AutoUpdateService;
 import com.shaneweather.android.util.HttpUtil;
 import com.shaneweather.android.util.LogUtil;
 import com.shaneweather.android.util.Utility;
@@ -227,6 +229,8 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
+        Intent intent=new Intent(this, AutoUpdateService.class);
+        startService(intent);
 
     }
 
